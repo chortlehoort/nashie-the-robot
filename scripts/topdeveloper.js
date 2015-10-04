@@ -8,10 +8,9 @@ module.exports = function(robot) {
     help[help.length] = "students - List all students";
     help[help.length] = "students cohort <cohort id> - List all students in the corresponding cohort";
     help[help.length] = "students add <full name> <cohort id> - Add a student to the corresponding cohort";
-
-    // help[help.length] = "";
-    // help[help.length] = "";
-    // help[help.length] = "";
+    help[help.length] = "-------------------";
+    help[help.length] = "award <student id>,<points>,<comments> - Awards students points towards top developer (e.g. `spacebot award 10,50,Strong leadership in group project`)";
+    help[help.length] = "report cohort <cohort id> - Shows the top five students in a cohort";
     // help[help.length] = "";
     // help[help.length] = "";
     res.send(help.join("\n"));

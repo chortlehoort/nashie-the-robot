@@ -49,9 +49,9 @@ module.exports = function(robot) {
 
         allScores = _.sortBy(allScores, "points").reverse().map(function(item) {
           return item.fullname + "\t" + item.points;
-        }).splice(0,3).join("\n");
+        }).splice(0,5).join("\n");
 
-        allScores = "The top three students for that cohort are:\n\n" + allScores;
+        allScores = "The top five students for that cohort are:\n\n" + allScores;
 
         res.send(allScores);
       });
