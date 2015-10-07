@@ -1,13 +1,13 @@
 module.exports = function(robot) {
 
-  var isInstructor = function(username) {
-    robot.http("http://stevebrownlee.com:8081/instructors").get()(function(err, response, body) {
-      var instructors = JSON.parse(body);
-    });
-  };
+  /*
+    This method allows anyone to see a list of instructors
 
+    For example:
+      po instructors
+  */
   robot.respond(/instructors$/i, function(res) {
-    robot.http("http://www.stevebrownlee.com:8081/instructors").get()(function(err, response, body) {
+    robot.http("http://localhost:8081/instructors").get()(function(err, response, body) {
       var instructors = JSON.parse(body);
       instructors = instructors.map(function(i) {
         var instructor = (i.active) ? i.fullname : "_" + i.fullname + "_";
@@ -17,14 +17,21 @@ module.exports = function(robot) {
     });
   });
 
-  robot.respond(/instructors add (.*) (.*)/i, function(res) {
+  /*
+    This method allows the owner/maintainer to add a new instructor
+
+    For example:
+      po instructor add Jennifer Wells jen.wells
+  */
+  robot.respond(/instructor add (.*) (.*)/i, function(res) {
+
     if (res.message.user.name === "steve.brownlee") {
       var instructor = JSON.stringify({
         fullname: res.match[1],
         slackhandle: res.match[2]
       });
 
-      robot.http("http://www.stevebrownlee.com:8081/instructors")
+      robot.http("http://localhost:8081/instructors")
         .header('Content-Type', 'application/json')
         .post(instructor)(function(err, response, body) {
         if (err) {
@@ -34,6 +41,7 @@ module.exports = function(robot) {
         }
       });
     }
+
   });
 
 
