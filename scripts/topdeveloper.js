@@ -18,16 +18,11 @@ module.exports = function(robot) {
     help[help.length] = "*Commands available to owners/admins*";
     help[help.length] = "instructor add <full name> <username>";
 
-    // help[help.length] = "";
     res.send(help.join("\n"));
   });
 
   robot.respond(/keys/i, function(res) {
    res.send(JSON.stringify(res.message));
-   // res.send(JSON.stringify(res.robot));
-   // res.send(JSON.stringify(res.match));
-   // res.send(JSON.stringify(res.envelope));
   });
-
 
 };

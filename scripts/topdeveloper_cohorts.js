@@ -2,6 +2,13 @@ var as = require("./as");
 
 module.exports = function(robot) {
 
+  /*
+    This method allows instructors to update any arbitrary property of a
+    Cohort object
+
+    For example:
+      po putc 1 alias d11
+  */
   robot.respond(/putc (.*) (.*) (.*)/i, function(res) {
 
     as.instructor(robot, res, function() {
@@ -22,6 +29,13 @@ module.exports = function(robot) {
 
   });
 
+
+  /*
+    This method allows instructors to add a new Cohort object
+
+    For example:
+      po add cohort Evening Cohort 4
+  */
   robot.respond(/add cohort (.*)/i, function(res) {
 
     as.instructor(robot, res, function() {
@@ -42,7 +56,12 @@ module.exports = function(robot) {
 
   });
 
+  /*
+    This method allows anyone to see a list of Cohorts
 
+    For example:
+      po cohorts
+  */
   robot.respond(/cohorts$/i, function(res) {
     robot.http("http://localhost:8081/cohorts").get()(function(err, response, body) {
       var cohorts = JSON.parse(body);

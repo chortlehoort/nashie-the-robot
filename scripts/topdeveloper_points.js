@@ -5,6 +5,12 @@ var as = require("./as");
 module.exports = function(robot) {
 
 
+  /*
+    This method allows instructors award points to students
+
+    For example:
+      po award jason450 10 -m Extra effort
+  */
   robot.respond(/award (.*) (.*) -m (.*)$/i, function(res) {
 
     as.instructor(robot, res, function() {
@@ -43,6 +49,14 @@ module.exports = function(robot) {
 
   });
 
+
+  /*
+    This method allows instructors to see who the current top 5 students are
+    in a cohort
+
+    For example:
+      po report cohort d11
+  */
   robot.respond(/report cohort (.+)$/i, function(res) {
 
     as.instructor(robot, res, function() {
@@ -69,6 +83,12 @@ module.exports = function(robot) {
   });
 
 
+  /*
+    This method allows instructors to get a report on all awards for a student
+
+    For example:
+      po report jen90ty
+  */
   robot.respond(/report student (.+)/i, function(res) {
     as.instructor(robot, res, function() {
       var student, report, fDate;
