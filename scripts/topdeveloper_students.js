@@ -1,6 +1,44 @@
 var as = require("./as");
+var moment = require("moment");
+
 
 module.exports = function(robot) {
+
+
+  /*
+    This method allows a student to record an absence
+
+    For example:
+      po absent 10/30/2015
+  */
+  robot.respond(/absent (.*)/i, function(res) {
+
+    robot.http("http://localhost:8081/students?slackhandle=" + res.message.user.name)
+      .header('Content-Type', 'application/json')
+      .get()(function(err, response, body) {
+
+        var student = JSON.parse(body)[0];
+
+        var absence = JSON.stringify({
+          absence_date : moment(new Date(res.match[1])).format("MM-DD-YYYY"),
+          student : student
+        });
+
+        robot.http("http://localhost:8081/absences")
+          .post(absence)(function(err, response, body) {
+
+            if (err) {
+              res.send("Absence not added. " + err);
+            } else {
+              res.send("Absence added.");
+            }
+
+          });
+    });
+  });
+
+
+
 
   /*
     This method allows an instructor to awards points to a student
@@ -27,6 +65,8 @@ module.exports = function(robot) {
     });
 
   });
+
+
 
   /*
     This method allows an instructor to add a new student to a cohort
@@ -125,7 +165,6 @@ module.exports = function(robot) {
     });
 
   });
-
 
 
 };

@@ -11,7 +11,6 @@ module.exports = {
       });
 
       if (isInstructor) {
-        res.send("*Verified instructor*")
         callback.call(this);
       } else {
         res.send("*Access denied*");
