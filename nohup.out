@@ -1,0 +1,29 @@
+[Sun Apr 19 2015 20:09:32 GMT-0400 (EDT)] INFO Connecting...
+[Sun Apr 19 2015 20:09:32 GMT-0400 (EDT)] INFO Logged in as spacebot of Nashville Software School, but not yet connected
+[Sun Apr 19 2015 20:09:32 GMT-0400 (EDT)] INFO Slack client now connected
+[Sun Apr 19 2015 20:09:32 GMT-0400 (EDT)] ERROR hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`
+[Sun Apr 19 2015 20:09:33 GMT-0400 (EDT)] INFO Using default redis on localhost:6379
+[Sun Apr 19 2015 20:09:33 GMT-0400 (EDT)] INFO Data for hubot brain retrieved from Redis
+[Thu Apr 23 2015 16:32:38 GMT-0400 (EDT)] ERROR Last pong is too old: 10.004
+[Thu Apr 23 2015 16:32:38 GMT-0400 (EDT)] INFO Reconnecting in 1000ms
+[Thu Apr 23 2015 16:32:39 GMT-0400 (EDT)] INFO Attempting reconnect
+[Thu Apr 23 2015 16:32:39 GMT-0400 (EDT)] INFO Connecting...
+[Thu Apr 23 2015 16:32:39 GMT-0400 (EDT)] INFO Logged in as spacebot of Nashville Software School, but not yet connected
+[Thu Apr 23 2015 16:32:40 GMT-0400 (EDT)] INFO Slack client now connected
+[Thu Apr 23 2015 16:32:40 GMT-0400 (EDT)] ERROR hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`
+[Thu Apr 23 2015 16:32:40 GMT-0400 (EDT)] INFO Using default redis on localhost:6379
+[Thu Apr 23 2015 16:32:40 GMT-0400 (EDT)] INFO Data for hubot brain retrieved from Redis
+[Thu Apr 23 2015 16:32:40 GMT-0400 (EDT)] INFO Slack client closed
+[Fri Apr 24 2015 09:55:33 GMT-0400 (EDT)] INFO Connecting...
+[Fri Apr 24 2015 09:55:34 GMT-0400 (EDT)] INFO Logged in as spacebot of Nashville Software School, but not yet connected
+[Fri Apr 24 2015 09:55:34 GMT-0400 (EDT)] INFO Slack client now connected
+[Fri Apr 24 2015 09:55:34 GMT-0400 (EDT)] ERROR hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`
+[Fri Apr 24 2015 09:55:35 GMT-0400 (EDT)] INFO Using default redis on localhost:6379
+[Fri Apr 24 2015 09:55:35 GMT-0400 (EDT)] INFO Data for hubot brain retrieved from Redis
+[Thu May 07 2015 04:35:01 GMT-0400 (EDT)] INFO Slack client closed
+[Tue May 12 2015 22:48:57 GMT-0400 (EDT)] INFO Connecting...
+[Tue May 12 2015 22:48:58 GMT-0400 (EDT)] INFO Logged in as spacebot of Nashville Software School, but not yet connected
+[Tue May 12 2015 22:48:58 GMT-0400 (EDT)] INFO Slack client now connected
+[Tue May 12 2015 22:48:58 GMT-0400 (EDT)] ERROR hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`
+[Tue May 12 2015 22:48:59 GMT-0400 (EDT)] INFO Using default redis on localhost:6379
+[Tue May 12 2015 22:48:59 GMT-0400 (EDT)] INFO Data for hubot brain retrieved from Redis
