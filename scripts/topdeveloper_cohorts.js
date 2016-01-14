@@ -57,6 +57,34 @@ module.exports = function(robot) {
   });
 
   /*
+    This method allows instructors to remove a graduated Cohort
+
+    For example:
+      po remove cohort d10
+  */
+  robot.respond(/remove cohort (.*)/i, function(res) {
+
+    as.instructor(robot, res, function() {
+      robot.http("http://localhost:8081/cohorts?alias=" + res.match[1])
+        .header('Content-Type', 'application/json')
+        .get()(function(err, response, body) {
+
+          robot.http("http://localhost:8081/cohorts/" + JSON.parse(body)[0].id)
+            .delete()(function(err, response, body) {
+
+              if (err) {
+                res.send("Could not remove cohort. " + err);
+              } else {
+                res.send("Cohort removed");
+              }
+
+            });
+
+      });
+    });
+  });
+
+  /*
     This method allows anyone to see a list of Cohorts
 
     For example:

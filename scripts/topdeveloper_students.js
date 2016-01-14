@@ -44,7 +44,7 @@ module.exports = function(robot) {
     This method allows an instructor to awards points to a student
 
     For example:
-      po puts sarah.story 10 -m Extra effort on group project
+      po puts 108 fullname Jeremy Landi
   */
   robot.respond(/puts (.*) (.*) (.*)/i, function(res) {
 
