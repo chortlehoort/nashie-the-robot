@@ -10,14 +10,16 @@ module.exports = function(robot) {
       po instructors
   */
   robot.respond(/instructors$/i, function(res) {
-    robot.http("http://localhost:8081/instructors").get()(function(err, response, body) {
-      var instructors = JSON.parse(body);
-      instructors = instructors.map(function(i) {
-        var instructor = (i.active) ? i.fullname : "_" + i.fullname + "_";
-        return "[*" + i.id + "*] " + instructor;
-      }).join("\n");
-      res.send(instructors);
-    });
+    if (res.message.user.name === "steve.brownlee") {
+      robot.http("http://localhost:8081/instructors").get()(function(err, response, body) {
+        var instructors = JSON.parse(body);
+        instructors = instructors.map(function(i) {
+          var instructor = (i.active) ? i.fullname : "_" + i.fullname + "_";
+          return "[*" + i.id + "*] " + instructor;
+        }).join("\n");
+        res.send(instructors);
+      });
+    }
   });
 
 
@@ -26,7 +28,7 @@ module.exports = function(robot) {
     Cohort object
 
     For example:
-      po putc 1 alias d11
+      po briefing
   */
   robot.respond(/briefing$/i, function(res) {
 
@@ -60,9 +62,9 @@ module.exports = function(robot) {
     This method allows the owner/maintainer to add a new instructor
 
     For example:
-      po instructor add Jennifer Wells jen.wells
+      po add instructor -name Jennifer Wells -handle jen.wells
   */
-  robot.respond(/instructor add (.*) (.*)/i, function(res) {
+  robot.respond(/add instructor -name (.*) -handle (.*)/i, function(res) {
 
     if (res.message.user.name === "steve.brownlee") {
       var instructor = JSON.stringify({
@@ -81,6 +83,33 @@ module.exports = function(robot) {
       });
     }
 
+  });
+  
+  /*
+    This method allows an instructor to remove an instructor
+
+    For example:
+      po remove instructor mike.young
+  */
+  robot.respond(/remove instructor (.*)/i, function(res) {
+
+    if (res.message.user.name === "steve.brownlee") {
+      robot.http("http://localhost:8081/instructors?slackhandle=" + res.match[1])
+        .header('Content-Type', 'application/json')
+        .get()(function(err, response, body) {
+
+          robot.http("http://localhost:8081/instructors/" + JSON.parse(body)[0].id)
+            .delete()(function(err, response, body) {
+
+              if (err) {
+                res.send("Could not remove instructor. " + err);
+              } else {
+                res.send("Instructor removed");
+              }
+
+            });
+      });
+    }
   });
 
 

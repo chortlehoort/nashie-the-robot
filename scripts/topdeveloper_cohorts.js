@@ -26,7 +26,6 @@ module.exports = function(robot) {
         }
       });
     });
-
   });
 
 
@@ -36,11 +35,12 @@ module.exports = function(robot) {
     For example:
       po add cohort Evening Cohort 4
   */
-  robot.respond(/add cohort (.*)/i, function(res) {
+  robot.respond(/add cohort -name (.*) -alias (.*)$/i, function(res) {
 
     as.instructor(robot, res, function() {
       var data = JSON.stringify({
-        label: res.match[1]
+        label: res.match[1],
+        alias: res.match[2]
       });
 
       robot.http("http://localhost:8081/cohorts")

@@ -74,15 +74,15 @@ module.exports = function(robot) {
     For example:
       po add student mary.hart d11
   */
-  robot.respond(/add student (.*) (.*)/i, function(res) {
+  robot.respond(/add student -name (.*) -handle (.*) -cohort (.*)/i, function(res) {
 
-    robot.http("http://localhost:8081/cohorts?alias=" + res.match[2])
+    robot.http("http://localhost:8081/cohorts?alias=" + res.match[3])
       .get()(function(err, response, body) {
 
       var cohort = JSON.parse(body);
       var student = JSON.stringify({
         fullname: res.match[1],
-        slackhandle: "tbd",
+        slackhandle: res.match[2],
         cohort: cohort[0].id
       });
 
@@ -99,7 +99,7 @@ module.exports = function(robot) {
 
   });
 
-    /*
+  /*
     This method allows an instructor to remove a student
 
     For example:
