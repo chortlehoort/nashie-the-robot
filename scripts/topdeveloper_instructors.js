@@ -43,12 +43,12 @@ module.exports = function(robot) {
 
           if (absences.length) {
             res.send("*Students absent today*\n");
-            for (var i = absences.length; i--; ) {
-              var currentAbsence = absences[i];
-              if (moment(currentAbsence.absence_date).format("MM-DD-YYYY") === today) {
-                res.send(currentAbsence.student.fullname);
+              for (var i = absences.length; i--; ) {
+                var currentAbsence = absences[i];
+                if (moment(currentAbsence.absence_date).format("MM-DD-YYYY") === today) {
+                  res.send(currentAbsence.student.fullname);
+                }
               }
-            }
           }
         }
 
@@ -111,6 +111,4 @@ module.exports = function(robot) {
       });
     }
   });
-
-
 };

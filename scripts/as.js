@@ -5,7 +5,7 @@ module.exports = {
       var instructors = JSON.parse(body);
 
       instructors.forEach(function(i) {
-        if (i.slackhandle === res.message.user.name) {
+        if (i.slackhandle.trim() === res.message.user.name) {
           isInstructor = true;
         }
       });

@@ -9,9 +9,10 @@ module.exports = function(robot) {
     This method allows instructors award points to students
 
     For example:
-      po award jason450 10 -m Extra effort
+      (deprecated) po award jason450 10 -m Extra effort
+       po note jason450 -m Extra effort
   */
-  robot.respond(/award (.*) (.*) -m (.*)$/i, function(res) {
+  robot.respond(/note (.*) -m (.*)$/i, function(res) {
 
     as.instructor(robot, res, function() {
 
@@ -27,57 +28,25 @@ module.exports = function(robot) {
         .get()(function(err, response, body) {
           var student = JSON.parse(body)[0];
 
-          var award = JSON.stringify({
+          var note = JSON.stringify({
             student: student,
-            value: res.match[2],
-            comment: res.match[3],
+            comment: res.match[2],
             instructor: res.message.user.name
           });
+        
+          console.log(note);
 
-          robot.http("http://localhost:8081/points")
+          robot.http("http://localhost:8081/notes")
             .header('Content-Type', 'application/json')
-            .post(award)(function(err, response, body) {
+            .post(note)(function(err, response, body) {
             if (err) {
-              res.send("Points not added. " + err);
+              res.send("Note not added. " + err);
             } else {
-              res.send("Points added");
+              res.send("Note added");
             }
           });
         });
 
-    });
-
-  });
-
-
-  /*
-    This method allows instructors to see who the current top 5 students are
-    in a cohort
-
-    For example:
-      po report cohort d11
-  */
-  robot.respond(/report cohort (.+)$/i, function(res) {
-
-    as.instructor(robot, res, function() {
-
-    robot.http("http://localhost:8081/cohorts?alias=" + res.match[1])
-      .get()(function(err, response, body) {
-        var cohort = JSON.parse(body)[0];
-
-        robot.http("http://localhost:8081/cohorts/report?id=" + cohort.id)
-          .get()(function(err, response, body) {
-
-          var allScores = JSON.parse(body);
-          allScores = _.sortBy(allScores, "points").reverse().map(function(item) {
-            return item.points + " | " + item.fullname + " <"+ item.slackhandle +">\t";
-          }).splice(0,5).join("\n");
-
-          allScores = "The top five students for that cohort are:\n\n" + allScores;
-          res.send(allScores);
-        });
-
-      });
     });
 
   });
@@ -100,10 +69,11 @@ module.exports = function(robot) {
           res.send("Student not available. " + err);
         } else {
           student = JSON.parse(body);
+          console.log("student", student);
 
-          report = student[0].score.map(function(award) {
-            fDate = moment(award.createdAt).format("dddd, MMMM Do YYYY");
-            return "Awarded " + award.value + " points by " + award.instructor + " on " + fDate + " for " + award.comment;
+          report = student[0].notes.map(function(note) {
+            fDate = moment(note.createdAt).format("dddd, MMMM Do YYYY");
+            return note.comment + " -- (" + note.instructor + ")";
           }).join("\n");
 
           report = "Report for " + student[0].fullname + "\n\n" + report;
